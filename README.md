@@ -1,62 +1,20 @@
-
-
-[![DOI](https://zenodo.org/badge/251371344.svg)](https://zenodo.org/badge/latestdoi/251371344)
-
-
-# An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie
-
-This repository contains quality-assurance scripts for an fMRI dataset collected while 25 participants watched [The Grand Budapest Hotel](https://en.wikipedia.org/wiki/The_Grand_Budapest_Hotel) by Wes Anderson. The associated manuscript *An fMRI dataset in response to "The Grand Budapest Hotel", a socially-rich, naturalistic movie* by Matteo Visconti di Oleggio Castello, Vassiki Chauhan, Guo Jiahui, & M. Ida Gobbini is available as a preprint [here](https://www.biorxiv.org/content/10.1101/2020.07.14.203257v1).
-
-The dataset is available on OpenNeuro: https://openneuro.org/datasets/ds003017. See below for information on how to install the dataset. If you use the dataset, please cite the corresponding paper:
-
-> Visconti di Oleggio Castello, M., Chauhan, V., Jiahui, G., & Gobbini, M. I. An fMRI dataset in response to “The Grand Budapest Hotel”, a socially-rich, naturalistic movie. *Sci Data* **7**, 383 (2020). https://doi.org/10.1038/s41597-020-00735-4
-
-This repository and associated code can be cited as follows:
+This repository and associated code is originaly from:
 
 > Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data*. Zenodo.  http://doi.org/10.5281/zenodo.3942173
+
+It has since been edited by @aim for comparison with Marvi et al (2025). 
 
 ## Cloning this repository and downloading the dataset
 
 To clone this repository, run
 
 ```bash
-$ git clone https://github.com/mvdoc/budapest-fmri-data.git
+$ git clone https://github.com/aimarvi/budapest.git
 ```
-
-The OpenNeuro dataset is included in this repository as a git submodule, and it can be downloaded with [DataLad](https://www.datalad.org/) (see also the next section). Once you have cloned the repository, obtaining the data is as simple as
-
-```bash
-$ cd budapest-fmri-data
-$ datalad install data
-# If for example you want to download the data from one subject, you can run
-$ datalad get data/sub-sid000005
-# Alternatively, to get all the data, you can run
-$ datalad get data
-```
-
-The dataset can also be installed from [DataLad](https://www.datalad.org/) to a different location by running
-
-```bash
-$ datalad install ///labs/gobbini/budapest/openneuro
-```
-
-Or it can be downloaded from the [OpenNeuro's website, dataset ds003017]( https://openneuro.org/datasets/ds003017). 
-
-Please refer to the [DataLad handbook](http://handbook.datalad.org/en/latest/) to learn how to use DataLad.
 
 ## Setting up a python environment
-
-We provide a conda environment file to set up an appropriate python environment for the preprocessing scripts. This environment has been tested on Linux and Mac OS X, however there's a chance it might not work on your system. Please feel free to open an issue here and we'll try to help.
-
-Assuming you have already installed [anaconda or miniconda](https://docs.anaconda.com/anaconda/install/) on your system, you can set up a new conda environment with requirements as follows (note that it can take a while):
-
 ```bash
 $ conda env create -f conda-environment.yml --name budapest
-```
-
-Once all packages have been installed, you should activate the environment and install an additional python package that we provide which contains additional helper functions:
-
-```bash
 $ conda activate budapest
 $ pip install ./code
 ```

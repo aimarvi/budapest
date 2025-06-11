@@ -5,4 +5,6 @@ workdir
 singularity
 .idea
 
+# large and/or subject specific files
 scripts/presentation/stim
+scripts/presentation/res
