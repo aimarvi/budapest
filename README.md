@@ -19,7 +19,7 @@ $ conda activate budapest
 $ pip install ./code
 ```
 
-See [Presentation scripts](#presentation-scripts)
+See the section of [presentation scripts](#presentation-scripts) for installing PsychoPy. It's not included in the conda environment for various reasons
 
 ## Presentation, preprocessing, and quality assurance scripts
 

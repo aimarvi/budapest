@@ -13,7 +13,7 @@ import csv
 import datetime
 import shutil
 
-from input_utils import read_trigger
+import input_utils as inut
 
 skip_response = False
 debug = False
@@ -184,7 +184,11 @@ intro.draw()
 scrwin.flip()
 # open up serial port and wait for first trigger
 if using_scanner:
-    read_trigger()
+    # @aim: testing if this will work
+    trigger_file = open('/dev/hidraw1', 'rb')
+    trigger_file.setblocking(False)
+    inut.check_trigger_continous(trigger_file)
+    print('test passed!')
 #     port_name = '/dev/hidraw2' # @aim: scanner input is different
 # 
 #     ser = serial.Serial(ser_port, 115200, timeout=.0001)
@@ -256,13 +260,18 @@ while not movie.isFinished:
             iflips, time.getTime() - trunbegin))
         logging.flush()
     iflips += 1
-#     if ser.read() == '5':
-#         logging.info("TRIGGER")
-#         lasttrigger = timer_exp.getTime()
+
+    if inut.check_trigger_continuous(trigger_file):
+        logging.info("TRIGGER")
+        lasttrigger = timer_exp.getTime()
+
 #     # @aim: added a manual stop
 #     elif ser.read() == STOP_TRIGGER:
 #         movie.stop()
 #         break
+
+trigger_file.close()
+
 logging.exp("MOVIE FINISHED")
 scrwin.flip()
 # wait 10 seconds at the end
