@@ -4,6 +4,7 @@ __pycache__
 workdir
 singularity
 .idea
+.DS*
 
 # large and/or subject specific files
 scripts/presentation/stim

@@ -9,8 +9,8 @@ def read_trigger(dev='/dev/hidraw1'):
                 continue
             return True
 
+if __name__=='__main__':
+    while not read_trigger():
+        continue
 
-while not read_trigger():
-    continue
-
-print('yay!')
+    print('yay!')

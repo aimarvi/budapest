@@ -19,7 +19,7 @@ $ conda activate budapest
 $ pip install ./code
 ```
 
-If you're 
+See [Presentation scripts](#presentation-scripts)
 
 ## Presentation, preprocessing, and quality assurance scripts
 
@@ -60,6 +60,12 @@ $ pip install psychopy
 $ conda activate budapest
 $ pip install https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-22.04/wxPython-4.2.1-cp310-cp310-linux_x86_64.whl
 $ pip install psychopy
+```
+
+Running a demo/test version outside of the scanner also requires the following package:
+
+```bash
+pip install psychopy-mri-emulator
 ```
 
 All presentation scripts assume that the stimuli are placed in a subdirectory named `stim`.
