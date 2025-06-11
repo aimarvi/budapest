@@ -1,0 +1,8 @@
+*.ipynb_checkpoints
+*.egg-info
+__pycache__
+workdir
+singularity
+.idea
+
+scripts/presentation/stim

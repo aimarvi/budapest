@@ -1,0 +1,22 @@
+name: budapest
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - jupyterlab
+  - seaborn
+  - jupyter
+  - scipy
+  - python=3.10
+  - scikit-learn
+  - ipython
+  - matplotlib
+  - cython
+  - nodejs
+  - pip
+  - setuptools
+  - pip:
+    - nilearn
+    - pycortex
+    - nibabel
+prefix: /home/contematto/miniconda3/envs/budapest

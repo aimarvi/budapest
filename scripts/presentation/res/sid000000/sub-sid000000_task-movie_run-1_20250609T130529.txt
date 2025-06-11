@@ -1,0 +1,11 @@
+6.8018 	WARNING 	Unknown type in handleLineEditChange: inputFieldName=run_nr, type=<class 'range'>, value=1
+10.7880 	WARNING 	Subject {0} not present in volume file, using default volume as 0.8
+10.7886 	EXP 	Added new global key event: quit experiment gracefully
+10.7890 	WARNING 	Monitor specification not found. Creating a temporary one...
+10.7891 	WARNING 	Use of rgb arguments to stimuli are deprecated. Please use color and colorSpace args instead
+11.0887 	INFO 	Using renderer 'Mesa Intel(R) Xe Graphics (TGL GT2)' for graphics
+11.0888 	INFO 	OpenGL version supported by driver is 4..
+11.7614 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x7f1a8fa70700>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x7f1a8fa706a0>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([-1, -1, -1]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7f1a704eabf0>, multiSample=False, name='window1', numSamples=2, pos=(288, 128), screen=0, size=array([1024,  768]), stencilBits=0, stereo=False, title='PsychoPy', units='pix', useFBO=False, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+11.7614 	EXP 	window1: backgroundImage = None
+11.7614 	EXP 	window1: backgroundFit = 'cover'
+11.8835 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, draggable=False, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=np.float64(31.0), italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='pix', win=Window(...), wrapWidth=500)
