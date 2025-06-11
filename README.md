@@ -47,9 +47,20 @@ I am not including the `.mp4` files here because they're too large. please reach
 
 ### Presentation scripts
 
-For the behavioral session outside the scanner, subjects were  shown `budapest_part1.mp4` (generated as described above) using VLC and high-quality headphones. Subjects could adjust the volume as much as they liked, and no instructions were given.
+All presentation scripts used [PsychoPy](https://www.psychopy.org/). This is not included in the `conda` environment, so you will have to download it yourself:
 
-All presentation scripts used [PsychoPy](https://www.psychopy.org/). Unfortunately, we are unable to access the computer used for presentation, so we cannot provide the specific version used in our experiment. Any recent version of PsychoPy should be able to run the presentation code. Feel free to open an issue on this repository if you encounter problems.
+```bash
+$ conda activate budapest
+$ pip install psychopy
+```
+
+*IMPORTANT:* if you are running this code on linux, you might run into issues. try running with an additional line of code, see here:
+
+```bash
+$ conda activate budapest
+$ pip install https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-22.04/wxPython-4.2.1-cp310-cp310-linux_x86_64.whl
+$ pip install psychopy
+```
 
 All presentation scripts assume that the stimuli are placed in a subdirectory named `stim`.
 
@@ -95,28 +106,7 @@ The available columns are `onset` (frame onset); `duration` (containing a python
 
 We provide a simplified events file with the published BIDS dataset. These events file were generated in the notebook  [`notebooks/2020-06-08_make-event-files.ipynb`](notebooks/2020-06-08_make-event-files.ipynb).
 
-### fMRI preprocessing with fMRIprep
-
-The dataset was preprocessed using [fMRIprep](https://fmriprep.org) (version 20.1.1) in a singularity container. To obtain the container, run the following line (assuming you have singularity installed):
-
-```bash
-VERSION="20.1.1"; singularity build fmriprep-"$VERSION".simg docker://poldracklab/fmriprep:"$VERSION"
-```
-
-In [`scripts/preprocessing-fmri`](scripts/preprocessing-fmri) we provide the scripts that were used to run fMRIprep on the Dartmouth HPC cluster ([Discovery](https://rc.dartmouth.edu/index.php/discovery-overview/)). Please consider those scripts as an example, and refer to the documentation of fMRIprep for more details on preprocessing.
-
-### Quality assurance scripts
-
-We performed QA analyses looking at subject's motion, temporal SNR (tSNR), inter-subject correlation (ISC), and time-segment classification after hyperalignment. Please refer to the manuscript for more details.
-
-The script [`scripts/quality-assurance/compute-motion.py`](scripts/quality-assurance/compute-motion.py) and notebook  [`notebooks/2020-07-07_compute-outliers-and-median-motion.ipynb`](notebooks/2020-07-07_compute-outliers-and-median-motion.ipynb) were used to inspect subject's motion across subjects and to compute additional metrics.
-
-The scripts [`scripts/quality-assurance/compute-tsnr-volume.py`](scripts/quality-assurance/compute-tsnr-volume.py) and [`scripts/quality-assurance/compute-tsnr-fsaverage.py`](scripts/quality-assurance/compute-tsnr-fsaverage.py) were used to estimate tSNR in the subject's native space (volume) and in fsaverage. The scripts load the fMRIprep-processed data and perform denoising (as described in the manuscript and implemented in [`budapestcode.utils.clean_data`](https://github.com/mvdoc/budapest-fmri-data/blob/7b9059a1ead5002368487d8376c7345acc4e5511/code/budapestcode/utils.py#L55)) prior to computing tSNR. The tSNR values in volumetric space are plotted in a violin plot across subjects in [`notebooks/2020-04-04_plot-tsnr-group.ipynb`](notebooks/2020-04-04_plot-tsnr-group.ipynb). The script [`scripts/quality-assurance/plot-tsnr-fsaverage.py`](scripts/quality-assurance/plot-tsnr-fsaverage.py) plots the median tSNR across subjects on fsaverage using [pycortex](https://gallantlab.github.io/pycortex).
-
-The script  [`scripts/quality-assurance/compute-isc-fsaverage.py`](scripts/quality-assurance/compute-isc-fsaverage.py) computes inter-subject correlation on data projected to fsaverage, after denoising the data as described in the manuscript. The median ISC across subjects is plotted with [pycortex](https://gallantlab.github.io/pycortex) in [`scripts/quality-assurance/plot-isc-fsaverage.py`](scripts/quality-assurance/plot-isc-fsaverage.py).
-
-The data was hyperaligned with [PyMVPA](https://www.pymvpa.org) using the script [`scripts/hyperalignment-and-decoding/hyperalignment_pymvpa_splits.py`](scripts/hyperalignment-and-decoding/hyperalignment_pymvpa_splits.py) and time-segment classification across subjects was performed using the script [`scripts/hyperalignment-and-decoding/decoding_segments_splits.py`](scripts/hyperalignment-and-decoding/decoding_segments_splits.py). Please refer to the manuscript for more details on these analyses.
 
 ## Acknowledgements
 
-This work was supported by the [NSF grant #1835200](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1835200) to M. Ida Gobbini. We would like to thank Jim Haxby, Yaroslav Halchenko, Sam Nastase, and the members of the Gobbini and Haxby lab for helpful discussions during the development of this project.
+Thanks to the original authors, specifically Jiahui Guo !!
