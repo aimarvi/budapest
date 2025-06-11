@@ -2,7 +2,7 @@ This repository and associated code is originaly from:
 
 > Visconti di Oleggio Castello, M., Chauhan,  V., Jiahui, G., & Gobbini, M. I. (2020).  *mvdoc/budapest-fmri-data*. Zenodo.  http://doi.org/10.5281/zenodo.3942173
 
-It has since been edited by @aim for comparison with Marvi et al (2025). 
+It has since been edited by me (@aim) for comparison with Marvi et al (2025). I only used this code to present the stimuli in the scanner, *NOT* to process any resulting data (as of 06/2025).
 
 ## Cloning this repository and downloading the dataset
 
@@ -19,9 +19,11 @@ $ conda activate budapest
 $ pip install ./code
 ```
 
+If you're 
+
 ## Presentation, preprocessing, and quality assurance scripts
 
-In this repository we provide the scripts used to generate and preprocess the stimuli, to present the stimuli in the scanner, to preprocess the fMRI data, and to run quality assurance analyses. These scripts can be found in the [`scripts`](scripts) directory. In particular,
+In this repository the original authors provided the scripts used to generate and preprocess the stimuli, to present the stimuli in the scanner, to preprocess the fMRI data, and to run quality assurance analyses. These scripts can be found in the [`scripts`](scripts) directory. In particular,
 
 - [`scripts/preprocessing-stimulus`](scripts/preprocessing-stimulus) contains the scripts to
   split the movie into separate parts to be presented in the scanner, and preprocess the audio of the movie to make it more audible in the scanner.
@@ -30,8 +32,6 @@ In this repository we provide the scripts used to generate and preprocess the st
 - [`scripts/quality-assurance`](scripts/quality-assurance) contains scripts to run QA analyses and generate the figures reported in the data paper.
 - [`scripts/hyperalignment-and-decoding`](hyperalignment-and-decoding) contains scripts to perform hyperalignment and movie segment classification.
 - [`notebooks`](notebooks) contains jupyter notebooks to generate figures and run additional analyses.
-
-Below we describe the content of these directories and their role in the analyses.
 
 ### Stimuli
 
@@ -42,7 +42,7 @@ Stream #0:0(eng): Video: h264 (High), yuv420p(tv, smpte170m/smpte170m/bt709, pro
 Stream #0:1(eng): Audio: ac3, 48000 Hz, stereo, fltp, 160 kb/s (default)
 Stream #0:2(eng): Audio: ac3, 48000 Hz, 5.1(side), fltp, 384 kb/s
 ```
-I am not including the `.mp4` files here because they're too large. please reach out at amarvi@mit.edu if you'd like them. 
+I am not including the `.mp4` files here because they're too large. please reach out at amarvi@mit.edu if you'd like them. Our scan was a shortened version of the original localizer, using only runs 2,3 for a total of ~15 minutes of scantime. As a supplement, we primed subjects with a movie summary before hand (see [Story_Line.pptx](Story_Line.pptx)). 
 
 
 ### Presentation scripts
