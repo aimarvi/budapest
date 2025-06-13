@@ -182,11 +182,12 @@ intro = visual.TextStim(scrwin, text=intro_msg, height=31)
 # Start of experiment
 intro.draw()
 scrwin.flip()
+
 # open up serial port and wait for first trigger
+trigger_file = open('/dev/hidraw1', 'rb')
+trigger_file.setblocking(False)
 if using_scanner:
     # @aim: testing if this will work
-    trigger_file = open('/dev/hidraw1', 'rb')
-    trigger_file.setblocking(False)
     inut.check_trigger_continous(trigger_file)
     print('test passed!')
 #     port_name = '/dev/hidraw2' # @aim: scanner input is different
@@ -233,7 +234,7 @@ template_bids = '{onset:.3f}\t{{duration:.3f}}\t{frameidx}\t{videotime:.3f}' \
 # wait for fixation
 # core.wait(fixation_s)
 while timer_exp.getTime() - trunbegin < fixation_s: 
-    read_trigger()
+    inut.check_trigger_continuous(trigger_file)
 #     if ser.read() == '5':
 #         logging.info("TRIGGER")
 #         lasttrigger = timer_exp.getTime()
