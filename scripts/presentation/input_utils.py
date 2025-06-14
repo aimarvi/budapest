@@ -33,13 +33,15 @@ def check_trigger_continuous(f):
     return False
 
 def check_trigger_fd(fd):
-    try:
-        data = os.read(fd, 8)
-        if data and data[0] != 0:
-            return True
-    except BlockingIOError:
-        pass  # No data available
-    return False
+    received = False
+    while not received:
+        try:
+            data = os.read(fd, 8)
+            if data:
+                received = True
+        except BlockingIOError:
+            pass  # No data available
+    return
 
 if __name__=='__main__':
     # Open the device in read-only mode
@@ -49,4 +51,6 @@ if __name__=='__main__':
     flags = fcntl.fcntl(fd, fcntl.F_GETFL)
     fcntl.fcntl(fd, fcntl.F_SETFL, flags | os.O_NONBLOCK)
 
-    print('yay!')
+    if check_trigger_fd(fd):
+        print('yay')
+

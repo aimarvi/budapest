@@ -7,6 +7,7 @@ from psychopy import sound, core
 import time as ptime
 import serial
 import os
+import fcntl
 from os.path import join as pjoin, exists as pexists
 import json
 import csv
@@ -80,7 +81,7 @@ lastinfo = load_subjectlog(subjectlog)
 # ask info to experimenter
 info = {
     'subject_id': lastinfo['subject_id'],
-    'run_nr': range(1, n_parts + 1),
+    'run_nr': 2,
     'scanner?': True,
 }
 infdlg = gui.DlgFromDict(dictionary=info,
@@ -183,20 +184,15 @@ intro = visual.TextStim(scrwin, text=intro_msg, height=31)
 intro.draw()
 scrwin.flip()
 
-# open up serial port and wait for first trigger
-trigger_file = open('/dev/hidraw1', 'rb')
-trigger_file.setblocking(False)
+# @aim: open up serial port and wait for first trigger
+trigger_file = os.open('/dev/hidraw1', os.O_RDONLY)
+flags = fcntl.fcntl(trigger_file, fcntl.F_GETFL)
+fcntl.fcntl(trigger_file, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+
 if using_scanner:
-    # @aim: testing if this will work
-    inut.check_trigger_continous(trigger_file)
-    print('test passed!')
-#     port_name = '/dev/hidraw2' # @aim: scanner input is different
-# 
-#     ser = serial.Serial(ser_port, 115200, timeout=.0001)
-#     ser.flushInput()
-#     trigger = ''
-#     while trigger != '+':
-#         trigger = ser.read()
+    # @aim: new trigger for MIT scanner
+    inut.check_trigger_fd(trigger_file)
+    print('passed')
 else:
     # @aim: import launchScan from psychopy_mri_emulator instead of psychopy.hardware.emulator
     from psychopy_mri_emulator import launchScan
@@ -232,12 +228,8 @@ template_bids = '{onset:.3f}\t{{duration:.3f}}\t{frameidx}\t{videotime:.3f}' \
                 '\t{lasttrigger:.3f}'
 
 # wait for fixation
-# core.wait(fixation_s)
 while timer_exp.getTime() - trunbegin < fixation_s: 
-    inut.check_trigger_continuous(trigger_file)
-#     if ser.read() == '5':
-#         logging.info("TRIGGER")
-#         lasttrigger = timer_exp.getTime()
+    continue
 
 iflips = 1
 logging.exp("MOVIE STARTING")
@@ -262,16 +254,17 @@ while not movie.isFinished:
         logging.flush()
     iflips += 1
 
-    if inut.check_trigger_continuous(trigger_file):
-        logging.info("TRIGGER")
-        lasttrigger = timer_exp.getTime()
-
-#     # @aim: added a manual stop
+#     # @aim: removed the trigger info
+#     if inut.check_trigger_fd(trigger_file):
+#         logging.info("TRIGGER")
+#         lasttrigger = timer_exp.getTime()
+# 
+# 
 #     elif ser.read() == STOP_TRIGGER:
 #         movie.stop()
 #         break
 
-trigger_file.close()
+os.close(trigger_file)
 
 logging.exp("MOVIE FINISHED")
 scrwin.flip()
